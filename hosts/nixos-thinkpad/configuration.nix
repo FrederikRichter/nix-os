@@ -8,6 +8,11 @@
 
   # nix features
   nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than +5";
+  };
   security.polkit.enable = true;
   security.rtkit.enable = true;
 
@@ -17,8 +22,7 @@ services.displayManager = {
       autoLogin = {
           enable = true;
           user = "frederik";
-      };
-  };
+      }; };
 
 programs.light.enable = true;
 
