@@ -19,17 +19,14 @@
 # disable autologin xorg
 services.greetd = {
   enable = true;
-  settings = {
-      default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-          user = "frederik";
-      };
+  settings = rec {
+    initial_session = {
+      command = "${pkgs.sway}/bin/sway";
+      user = "frederik";
+    };
+    default_session = initial_session;
   };
 };
-
-environment.etc."greetd/environments".text = ''
-    sway
-'';
 
 programs.light.enable = true;
 
