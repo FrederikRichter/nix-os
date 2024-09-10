@@ -17,12 +17,19 @@
   security.rtkit.enable = true;
 
 # disable autologin xorg
-services.displayManager = {
-      defaultSession = "sway";
-      autoLogin = {
-          enable = true;
+services.greetd = {
+  enable = true;
+  settings = {
+      default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
           user = "frederik";
-      }; };
+      };
+  };
+};
+
+environment.etc."greetd/environments".text = ''
+    sway
+'';
 
 programs.light.enable = true;
 
