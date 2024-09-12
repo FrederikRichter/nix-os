@@ -28,6 +28,21 @@
         ];
     };
 
+programs.ssh.extraConfig = ''
+  Host eu.nixbuild.net
+    PubkeyAcceptedKeyTypes ssh-ed25519
+    ServerAliveInterval 60
+    IPQoS throughput
+    IdentityFile /home/frederik/.ssh/nixbuild
+'';
+
+programs.ssh.knownHosts = {
+  nixbuild = {
+    hostNames = [ "eu.nixbuild.net" ];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
+  };
+};
+
 # disable autologin xorg
     services.greetd = {
         enable = true;
@@ -137,8 +152,9 @@
     environment.systemPackages = with pkgs; [
 #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 #  wget
+        openssh
         kanshi
-            home-manager
+        home-manager
     ];
 # Some programs need SUID wrappers, can be configured further or are
 # started in user sessions.
