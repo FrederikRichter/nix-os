@@ -17,7 +17,7 @@
     security.rtkit.enable = true;
 
 # remote build
-    nix.settings = {
+    nix = {
         distributedBuilds = true;
         buildMachines = [
         { hostName = "eu.nixbuild.net";
