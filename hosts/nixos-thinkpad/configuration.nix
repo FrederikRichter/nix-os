@@ -28,6 +28,13 @@
         ];
     };
 
+services.logind = {
+  extraConfig = ''
+    HandleLidSwitchDocked=ignore
+  '';
+};
+
+
 programs.ssh.extraConfig = ''
   Host eu.nixbuild.net
     PubkeyAcceptedKeyTypes ssh-ed25519
