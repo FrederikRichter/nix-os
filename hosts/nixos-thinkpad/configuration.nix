@@ -191,11 +191,11 @@ programs.ssh.knownHosts = {
     system.stateVersion = "24.05"; # Did you read the comment?
 
 # hardware settings
-        hardware.opengl = {
-            enable = true;
-            extraPackages = with pkgs; [
-                intel-compute-runtime
-                    intel-media-driver
-            ];
-        };
+    hardware.opengl = {
+        enable = true;
+        extraPackages = with pkgs; [
+            intel-media-driver
+        ];
+    };
+    environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
 }
