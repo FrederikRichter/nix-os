@@ -13,9 +13,12 @@
         dates = "weekly";
         options = "--delete-older-than +5";
     };
-    security.polkit.enable = true;
+    security.polkit = {
+        enable = true;
+    };
     security.rtkit.enable = true;
 
+services.udisks2.enable = true;
 # remote build
     nix = {
         distributedBuilds = true;
