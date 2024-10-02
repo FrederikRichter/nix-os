@@ -20,16 +20,16 @@
 
 services.udisks2.enable = true;
 # remote build
-    nix = {
-        distributedBuilds = true;
-        buildMachines = [
-        { hostName = "eu.nixbuild.net";
-            system = "x86_64-linux";
-            maxJobs = 100;
-            supportedFeatures = [ "benchmark" "big-parallel" ];
-        }
-        ];
-    };
+#    nix = {
+#        distributedBuilds = true;
+#        buildMachines = [
+#        { hostName = "eu.nixbuild.net";
+#            system = "x86_64-linux";
+#            maxJobs = 100;
+#            supportedFeatures = [ "benchmark" "big-parallel" ];
+#        }
+#        ];
+#    };
 
 services.logind = {
   extraConfig = ''
