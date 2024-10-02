@@ -113,11 +113,12 @@ programs.ssh.knownHosts = {
 
 
 # Bootloader.
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+boot.kernelPackages = pkgs.linuxPackages_latest;
+boot.loader.systemd-boot.enable = true;
+boot.loader.efi.canTouchEfiVariables = true;
 
-    boot.initrd.luks.devices."luks-b1f28213-6a9b-4f3f-8d1b-cb4c98dc9c66".device = "/dev/disk/by-uuid/b1f28213-6a9b-4f3f-8d1b-cb4c98dc9c66";
-    networking.hostName = "nixos-thinkpad"; # Define your hostname.
+boot.initrd.luks.devices."luks-b1f28213-6a9b-4f3f-8d1b-cb4c98dc9c66".device = "/dev/disk/by-uuid/b1f28213-6a9b-4f3f-8d1b-cb4c98dc9c66";
+networking.hostName = "nixos-thinkpad"; # Define your hostname.
 # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
 # Configure network proxy if necessary
