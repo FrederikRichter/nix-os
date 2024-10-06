@@ -7,17 +7,24 @@
 {
 
 # nix features
-    nix.settings.experimental-features = ["nix-command" "flakes"];
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than +5";
+    nix = { 
+        settings = {
+            experimental-features = ["nix-command" "flakes"];
+            max-substitution-jobs = 8;
+            max-jobs=4;
+        };
+        gc = {
+            automatic = true;
+            dates = "weekly";
+            options = "--delete-older-than +5";
+        };
     };
     security.polkit = {
         enable = true;
     };
     security.rtkit.enable = true;
 
+# Build optimizations
 services.udisks2.enable = true;
 # remote build
 #    nix = {
@@ -156,7 +163,10 @@ networking.hostName = "nixos-thinkpad"; # Define your hostname.
     };
 
 # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+        allowUnfree = true;
+    };
+
 
 # List packages installed in system profile. To search, run:
 # $ nix search wget
