@@ -12,6 +12,7 @@
             experimental-features = ["nix-command" "flakes"];
             max-substitution-jobs = 8;
             max-jobs=4;
+            binary-caches-parallel-connections = 24;
         };
         gc = {
             automatic = true;
@@ -203,9 +204,8 @@ networking.hostName = "nixos-thinkpad"; # Define your hostname.
 # Before changing this value read the documentation for this option
 # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "24.05"; # Did you read the comment?
-
 # hardware settings
-    hardware.opengl = {
+    hardware.graphics = {
         enable = true;
         extraPackages = with pkgs; [
             intel-media-driver
