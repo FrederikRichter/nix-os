@@ -10,9 +10,10 @@
     nix = { 
         settings = {
             experimental-features = ["nix-command" "flakes"];
-            max-substitution-jobs = 8;
-            max-jobs=4;
-            binary-caches-parallel-connections = 24;
+            # max-substitution-jobs = 8;
+            # max-jobs=4;
+            # binary-caches-parallel-connections = 24;
+            # substituters =  [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
         };
         gc = {
             automatic = true;
@@ -28,16 +29,24 @@
 # Build optimizations
 services.udisks2.enable = true;
 # remote build
-#    nix = {
-#        distributedBuilds = true;
-#        buildMachines = [
-#        { hostName = "eu.nixbuild.net";
-#            system = "x86_64-linux";
-#            maxJobs = 100;
-#            supportedFeatures = [ "benchmark" "big-parallel" ];
-#        }
-#        ];
-#    };
+   nix = {
+       distributedBuilds = true;
+       extraOptions = ''builders-use-substitutes = true'';
+       buildMachines = [
+       { 
+           hostName = "builder";
+           system = "x86_64-linux";
+           protocol = "ssh-ng";
+# if the builder supports building for multiple architectures, 
+# replace the previous line by, e.g.
+# systems = ["x86_64-linux" "aarch64-linux"];
+           maxJobs = 4;
+           speedFactor = 2;
+           supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+           mandatoryFeatures = [ ];
+       }
+       ];
+   };
 
 services.logind = {
   extraConfig = ''
@@ -47,11 +56,11 @@ services.logind = {
 
 
 programs.ssh.extraConfig = ''
-  Host eu.nixbuild.net
-    PubkeyAcceptedKeyTypes ssh-ed25519
-    ServerAliveInterval 60
-    IPQoS throughput
-    IdentityFile /home/frederik/.ssh/nixbuild
+Host 192.168.1.189 # Replace by IP address, or add a ProxyCommand, see `man ssh_config` for full docs.
+        # Prevent using ssh-agent or another keyfile, useful for testing
+        IdentitiesOnly yes
+        IdentityFile /root/.ssh/nixremote
+        User nixremote
 '';
 
 programs.ssh.knownHosts = {
