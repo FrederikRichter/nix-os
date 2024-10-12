@@ -10,6 +10,7 @@
     nix = { 
         settings = {
             experimental-features = ["nix-command" "flakes"];
+            trusted-users = [ "@wheel" ];
             # max-substitution-jobs = 8;
             # max-jobs=4;
             # binary-caches-parallel-connections = 24;
