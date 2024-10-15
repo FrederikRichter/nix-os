@@ -10,7 +10,7 @@
     nix = { 
         settings = {
             experimental-features = ["nix-command" "flakes"];
-            trusted-users = [ "@wheel" ];
+            trusted-users = [ "root" "@wheel" ];
             # max-substitution-jobs = 8;
             # max-jobs=4;
             # binary-caches-parallel-connections = 24;
@@ -29,25 +29,6 @@
 
 # Build optimizations
 services.udisks2.enable = true;
-# remote build
-   nix = {
-       distributedBuilds = true;
-       extraOptions = ''builders-use-substitutes = true'';
-       buildMachines = [
-       { 
-           hostName = "builder";
-           system = "x86_64-linux";
-           protocol = "ssh-ng";
-# if the builder supports building for multiple architectures, 
-# replace the previous line by, e.g.
-# systems = ["x86_64-linux" "aarch64-linux"];
-           maxJobs = 4;
-           speedFactor = 2;
-           supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-           mandatoryFeatures = [ ];
-       }
-       ];
-   };
 
 services.logind = {
   extraConfig = ''
@@ -57,19 +38,7 @@ services.logind = {
 
 
 programs.ssh.extraConfig = ''
-Host 192.168.1.189 # Replace by IP address, or add a ProxyCommand, see `man ssh_config` for full docs.
-        # Prevent using ssh-agent or another keyfile, useful for testing
-        IdentitiesOnly yes
-        IdentityFile /root/.ssh/nixremote
-        User nixremote
 '';
-
-programs.ssh.knownHosts = {
-  nixbuild = {
-    hostNames = [ "eu.nixbuild.net" ];
-    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
-  };
-};
 
 # disable autologin xorg
     services.greetd = {
