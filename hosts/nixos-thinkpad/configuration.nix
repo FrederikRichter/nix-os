@@ -116,6 +116,10 @@ networking.hostName = "nixos-thinkpad"; # Define your hostname.
         networking.networkmanager.enable = true; # Set your time zone.
         time.timeZone = "Europe/Berlin";
 
+# enable gvfs
+services.gvfs.enable = true; # Mount, trash, and other functionalities
+
+
 # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
 
