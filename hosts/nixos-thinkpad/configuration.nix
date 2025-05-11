@@ -30,6 +30,13 @@
 # Build optimizations
 services.udisks2.enable = true;
 
+# android interaction permissions
+  services.udev.packages = [
+    pkgs.android-udev-rules
+    pkgs.libwacom
+  ];
+
+
 services.logind = {
   extraConfig = ''
     HandleLidSwitchDocked=ignore
@@ -142,7 +149,7 @@ services.gvfs.enable = true; # Mount, trash, and other functionalities
     users.users.frederik = {
         isNormalUser = true;
         description = "Frederik Richter";
-        extraGroups = [ "networkmanager" "wheel" "video" ];
+        extraGroups = [ "networkmanager" "wheel" "video" "docker" ];
         packages = with pkgs; [];
     };
 
@@ -151,6 +158,8 @@ services.gvfs.enable = true; # Mount, trash, and other functionalities
         allowUnfree = true;
     };
 
+# Docker
+virtualisation.docker.enable = true;
 
 # List packages installed in system profile. To search, run:
 # $ nix search wget
