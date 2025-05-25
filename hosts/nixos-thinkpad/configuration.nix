@@ -22,10 +22,14 @@
             options = "--delete-older-than 5d";
         };
     };
-    security.polkit = {
-        enable = true;
-    };
-    security.rtkit.enable = true;
+
+# graphical session 
+security.polkit = {
+enable = true;
+};
+security.rtkit.enable = true;
+
+services.dbus.socketActivated = true;
 
 # Build optimizations
 services.udisks2.enable = true;
