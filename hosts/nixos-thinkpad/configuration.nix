@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
 {
 
 # nix features
@@ -28,8 +27,6 @@ security.polkit = {
 enable = true;
 };
 security.rtkit.enable = true;
-
-services.dbus.socketActivated = true;
 
 # Build optimizations
 services.udisks2.enable = true;
@@ -170,7 +167,6 @@ virtualisation.docker.enable = true;
     environment.systemPackages = with pkgs; [
 #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 #  wget
-        openssh
         kanshi
         home-manager
     ];
@@ -185,7 +181,14 @@ virtualisation.docker.enable = true;
 # List services that you want to enable:
 
 # Enable the OpenSSH daemon.
-# services.openssh.enable = true;
+services.openssh = {
+enable = true;
+ports = [ 22 ];
+settings = {
+	PasswordAuthentication = false;
+	PermitRootLogin = "no";
+};
+};
 
 # Open ports in the firewall.
 # networking.firewall.allowedTCPPorts = [ ... ];
