@@ -10,17 +10,38 @@
     };
   };
 
-  outputs = { nixpkgs, nixvim, nixos-hardware, ... }: {
-    nixosConfigurations."nixos-thinkpad" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules =  [
-            ./hosts/nixos-thinkpad/configuration.nix
-      ];
-      specialArgs = {
-          inherit nixvim;
-          inherit nixos-hardware;
+  outputs = { nixpkgs, nixvim, nixos-hardware, ... }:
+    let 
+      battlestation-host = "nixos-battlestation";
+      thinkpad-host = "nixos-thinkpad";
+    in
+  {
+      nixosConfigurations."${battlestation-host}" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules =  [
+              ./hosts/default/base.nix
+              ./hosts/default/graphical.nix
+          ];
+          specialArgs = {
+              inherit nixvim;
+              inherit nixos-hardware;
+              host = battlestation-host;
+          };
       };
-    };
+      nixosConfigurations."${thinkpad-host}" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules =  [
+              ./hosts/default/base.nix
+              ./hosts/default/graphical.nix
+              ./hosts/thinkpad/configuration.nix
+              nixos-hardware.nixosModules.lenovo-thinkpad-l14-intel
+          ];
+          specialArgs = {
+              inherit nixvim;
+              inherit nixos-hardware;
+              host = thinkpad-host;
+          };
+      };
   };
 }
 
