@@ -64,6 +64,19 @@
     description = lib.mkDefault "Frederik Richter";
     extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" ];
   };
+    
+
+# ssh
+    services.fail2ban.enable = true;
+
+    services.openssh = {
+        enable = true;
+        ports = [ 22 ];
+        settings = {
+            PasswordAuthentication = false;
+            PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+        };
+    };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
