@@ -20,6 +20,8 @@
     wireplumber.extraConfig.bluetoothEnhancements = {
       "monitor.bluez.properties" = {
         "bluez5.enable-hw-volume" = true;
+        "bluez5.enable-sbc-xq" = true;
+        "bluez5.enable-msbc" = true;
         "bluez5.codecs" = [
           "ldac"
           "aptx"
@@ -33,19 +35,23 @@
           "opus_05_duplex"
           "aac"
           "sbc_xq"
+          "sbc"
           "msbc"
         ];
         "bluez5.roles" = [
-          "hsp_hs"
-          "hsp_ag"
-          "hfp_hf"
-          "hfp_ag"
           "a2dp_sink"
           "a2dp_source"
-          "bap_sink"
-          "bap_source"
         ];
       };
+    };
+  };
+
+    services.pipewire.extraConfig.pipewire."92-low-latency" = {
+    "context.properties" = {
+      "default.clock.rate" = 48000;
+      "default.clock.quantum" = 32;
+      "default.clock.min-quantum" = 32;
+      "default.clock.max-quantum" = 32;
     };
   };
 
@@ -55,7 +61,13 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
+    settings.General = {
+       Experimental = true;
+        ControllerMode = "bredr";
+    };
   };
+
+  hardware.enableAllFirmware = true;
 
   # Security
   security.polkit.enable = lib.mkDefault true;
