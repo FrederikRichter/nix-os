@@ -12,7 +12,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   nixpkgs.config.nvidia.acceptLicense = true;
 
-    programs.noisetorch.enable = true;
+programs.noisetorch.enable = true;
 
     hardware = {
         nvidia = {
