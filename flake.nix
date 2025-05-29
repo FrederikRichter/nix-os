@@ -19,8 +19,6 @@
       nixosConfigurations."${battlestation-host}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules =  [
-              #./hosts/default/base.nix
-              #./hosts/default/graphical.nix
               ./hosts/battlestation/configuration.nix
           ];
           specialArgs = {
@@ -32,8 +30,6 @@
       nixosConfigurations."${thinkpad-host}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules =  [
-              ./hosts/default/base.nix
-              ./hosts/default/graphical.nix
               ./hosts/thinkpad/configuration.nix
               nixos-hardware.nixosModules.lenovo-thinkpad-l14-intel
           ];
