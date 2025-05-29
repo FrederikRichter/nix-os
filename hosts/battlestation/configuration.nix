@@ -9,12 +9,14 @@
   services.blueman.enable = lib.mkOverride 101 true;
   hardware.bluetooth.enable = lib.mkOverride 101 true;
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  nixpkgs.config.nvidia.acceptLicense = true;
 
-    nixpkgs.config.nvidia.acceptLicense = true;
+    programs.noisetorch.enable = true;
 
     hardware = {
         nvidia = {
-            open = false;  # see the note above
+            open = true;   
             # Modesetting is required.
             modesetting.enable = true;
             nvidiaSettings = true;
@@ -22,11 +24,6 @@
         };
         graphics = {
             enable = true;
-            extraPackages = with pkgs; [
-                vulkan-loader
-                vulkan-validation-layers
-                vulkan-tools
-            ];
         };
     };
  

@@ -26,7 +26,8 @@
   environment.systemPackages = with pkgs; [
     git
     home-manager
-    nixvim
+  ] ++ [
+  nixvim
   ];
 
   # Nix features
