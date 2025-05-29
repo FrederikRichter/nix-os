@@ -9,6 +9,10 @@
   services.blueman.enable = lib.mkOverride 101 true;
   hardware.bluetooth.enable = lib.mkOverride 101 true;
 
+    
+  hardware.bluetooth.powerOnBoot = lib.mkOverride 101 true;
+
+
   services.xserver.videoDrivers = [ "nvidia" ];
   nixpkgs.config.nvidia.acceptLicense = true;
 

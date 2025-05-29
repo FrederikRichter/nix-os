@@ -20,8 +20,6 @@
     wireplumber.extraConfig.bluetoothEnhancements = {
       "monitor.bluez.properties" = {
         "bluez5.enable-hw-volume" = true;
-        "bluez5.enable-sbc-xq" = true;
-        "bluez5.enable-msbc" = true;
         "bluez5.codecs" = [
           "ldac"
           "aptx"
@@ -36,7 +34,6 @@
           "aac"
           "sbc_xq"
           "sbc"
-          "msbc"
         ];
         "bluez5.roles" = [
           "a2dp_sink"
@@ -60,14 +57,12 @@
   # Hardware
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    powerOnBoot = lib.mkDefault false;
     settings.General = {
        Experimental = true;
         ControllerMode = "bredr";
     };
   };
-
-  hardware.enableAllFirmware = true;
 
   # Security
   security.polkit.enable = lib.mkDefault true;
