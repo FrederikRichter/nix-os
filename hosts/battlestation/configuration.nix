@@ -1,27 +1,27 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
-  imports = [
-    ../default/base.nix
-    ../default/graphical.nix
-    ../default/gaming.nix
-    ./hardware-configuration.nix
-  ];
-  services.blueman.enable = lib.mkOverride 101 true;
-  hardware.bluetooth.enable = lib.mkOverride 101 true;
-
-    
-  hardware.bluetooth.powerOnBoot = lib.mkOverride 101 true;
+    imports = [
+        ../default/base.nix
+        ../default/graphical.nix
+        ../default/gaming.nix
+        ./hardware-configuration.nix
+    ];
+    services.blueman.enable = lib.mkOverride 101 true;
+    hardware.bluetooth.enable = lib.mkOverride 101 true;
 
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  nixpkgs.config.nvidia.acceptLicense = true;
+    hardware.bluetooth.powerOnBoot = lib.mkOverride 101 true;
 
-programs.noisetorch.enable = true;
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+    nixpkgs.config.nvidia.acceptLicense = true;
+
+    programs.noisetorch.enable = true;
 
     hardware = {
         nvidia = {
             open = true;   
-            # Modesetting is required.
+# Modesetting is required.
             modesetting.enable = true;
             nvidiaSettings = true;
             package = config.boot.kernelPackages.nvidiaPackages.beta;
@@ -30,12 +30,12 @@ programs.noisetorch.enable = true;
             enable = true;
         };
     };
- 
-  environment.sessionVariables = {
-      GBM_BACKEND = "nvidia-drm";
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  };
 
-  system.stateVersion = "25.05";
+    environment.sessionVariables = {
+        GBM_BACKEND = "nvidia-drm";
+        LIBVA_DRIVER_NAME = "nvidia";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    };
+
+    system.stateVersion = "25.05";
 }
