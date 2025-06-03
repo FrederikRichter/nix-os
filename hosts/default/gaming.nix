@@ -8,4 +8,10 @@ programs.steam = {
 };
 programs.appimage.enable = true;
 programs.appimage.binfmt = true;
+
+programs.gamemode.enable = true;
+
+users.users.frederik = {
+    extraGroups = lib.mkOverride 101 [ "networkmanager" "wheel" "video" "gamemode" ];
+  };
 }
