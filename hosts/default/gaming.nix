@@ -11,6 +11,12 @@ programs.appimage.binfmt = true;
 
 programs.gamemode.enable = true;
 
+# Dyson Sphere
+networking.firewall = {
+      enable = true;
+      allowedTCPPorts = [ 8469 ];
+};
+
 users.users.frederik = {
     extraGroups = lib.mkOverride 101 [ "networkmanager" "wheel" "video" "gamemode" ];
   };

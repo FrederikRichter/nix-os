@@ -78,6 +78,11 @@
         };
     };
 
+# network manager
+
+networking.networkmanager.dns = "dnsmasq";
+
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 }
