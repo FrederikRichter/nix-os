@@ -38,6 +38,16 @@
     
 # vpn
     networking.firewall.checkReversePath = false; 
+ 
+ services.resolved = {
+  enable = true;
+  dnssec = "true";
+  domains = [ "~." ];
+  #dnsovertls = "true";
+};
+
+networking.networkmanager.dns = "systemd-resolved";
 
     system.stateVersion = "25.05";
+
 }
