@@ -8,7 +8,7 @@
     ];
     services.blueman.enable = lib.mkOverride 101 true;
     hardware.bluetooth.enable = lib.mkOverride 101 true;
-
+    
 
     hardware.bluetooth.powerOnBoot = lib.mkOverride 101 true;
 
@@ -30,12 +30,14 @@
             enable = true;
         };
     };
-
     environment.sessionVariables = {
         GBM_BACKEND = "nvidia-drm";
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
+    
+# vpn
+    networking.firewall.checkReversePath = false; 
 
     system.stateVersion = "25.05";
 }
