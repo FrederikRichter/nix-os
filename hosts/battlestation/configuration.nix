@@ -37,7 +37,12 @@
     };
     
 # vpn
-    networking.firewall.checkReversePath = false; 
+    networking.firewall = {
+        enable = true;
+        checkReversePath = false;
+        allowedTCPPorts = [ 80 443 1337 ];
+        allowedUDPPorts = [ 1337 ];
+    };
  
  services.resolved = {
   enable = true;
