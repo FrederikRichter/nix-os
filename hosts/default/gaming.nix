@@ -11,10 +11,9 @@ programs.appimage.binfmt = true;
 
 programs.gamemode.enable = true;
 
-# Dyson Sphere
 networking.firewall = {
       enable = true;
-      allowedTCPPorts = [ 8469 ];
+      allowedTCPPorts = [ 8469 27015 27036 ];
 };
 
 users.users.frederik = {
