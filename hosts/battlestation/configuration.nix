@@ -35,26 +35,13 @@
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
-    
-# vpn
-    networking.firewall = {
-        enable = true;
-        checkReversePath = false;
-        allowedTCPPorts = [ 80 443 1337 ];
-        allowedUDPPorts = [ 1337 ];
-    };
- 
- services.resolved = {
-  enable = true;
-  dnssec = "true";
-  domains = [ "~." ];
-  dnsovertls = "true";
+
+networking.firewall = {
+    enable = true;
+    checkReversePath = false;
+    allowedTCPPorts = [ 80 443 1337 ];
+    allowedUDPPorts = [ 1337 ];
 };
-
-networking.nameservers = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
-
-networking.networkmanager.dns = "systemd-resolved";
-
+ 
     system.stateVersion = "25.05";
-
 }
