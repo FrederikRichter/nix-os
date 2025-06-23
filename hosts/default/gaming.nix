@@ -17,6 +17,6 @@ networking.firewall = {
 };
 
 users.users.frederik = {
-    extraGroups = lib.mkOverride 101 [ "networkmanager" "wheel" "video" "gamemode" ];
+    extraGroups = lib.mkOverride 101 [ "networkmanager" "wheel" "video" ];
   };
 }

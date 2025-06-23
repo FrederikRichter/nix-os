@@ -28,12 +28,16 @@
         };
         graphics = {
             enable = true;
+            extraPackages = [
+                pkgs.nvidia-vaapi-driver
+            ];
         };
     };
     environment.sessionVariables = {
         GBM_BACKEND = "nvidia-drm";
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        NVD_BACKEND = "direct";
     };
 
 networking.firewall = {
