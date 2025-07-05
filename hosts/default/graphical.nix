@@ -52,6 +52,10 @@
     };
   };
 
+    services.pipewire.extraConfig.pipewire-pulse."93-no-crackling" = {
+        "pulse.min.quantum"      = "256/48000";
+  };
+
   services.blueman.enable = lib.mkDefault false;
 
   # Hardware
