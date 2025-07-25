@@ -47,14 +47,12 @@
     "context.properties" = {
       "default.clock.rate" = 48000;
       "default.clock.quantum" = 32;
-      "default.clock.min-quantum" = 32;
-      "default.clock.max-quantum" = 32;
     };
   };
 
-    services.pipewire.extraConfig.pipewire-pulse."93-no-crackling" = {
-        "pulse.min.quantum"      = "256/48000";
-  };
+  #   services.pipewire.extraConfig.pipewire-pulse."93-no-crackling" = {
+  #       "pulse.min.quantum"      = "256/48000";
+  # };
 
   services.blueman.enable = lib.mkDefault false;
 
