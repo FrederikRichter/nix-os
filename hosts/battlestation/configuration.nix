@@ -33,12 +33,16 @@
             ];
         };
     };
+
     environment.sessionVariables = {
         GBM_BACKEND = "nvidia-drm";
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         NVD_BACKEND = "direct";
     };
+    
+# HDR fix
+    environment.systemPackages = [pkgs.vulkan-hdr-layer-kwin6];
 
 networking.firewall = {
     enable = true;
