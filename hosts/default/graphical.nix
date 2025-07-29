@@ -1,5 +1,16 @@
 { config, pkgs, lib, ... }:
 {
+services.greetd = {
+  enable = true;
+  settings = rec {
+    initial_session = {
+      command = "${pkgs.hyprland}/bin/hyprland";
+      user = "frederik";
+    };
+    default_session = initial_session;
+  };
+};
+
     services.pipewire = {
         enable = true;
         alsa.enable = true;

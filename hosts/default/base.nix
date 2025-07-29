@@ -17,6 +17,23 @@
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
+  services.keyd = {
+      enable = true;
+      keyboards = {
+    # The name is just the name of the configuration file, it does not really matter
+    default = {
+        extraConfig = ''
+            [ids]
+            *
+
+            [main]
+            capslock = esc
+            esc = capslock
+      '';
+    };
+  };
+  };
+
 
   # Networking
   networking.networkmanager.enable = true;
