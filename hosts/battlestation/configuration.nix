@@ -1,11 +1,36 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
+
+  # Console keymap
+  console.keyMap = lib.mkDefault "us";
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
     imports = [
         ../default/base.nix
         ../default/graphical.nix
         ../default/gaming.nix
         ./hardware-configuration.nix
     ];
+
+
+    # WM
+
+    
+
+programs.hyprland = {
+    enable = true;
+};
+
+programs.sway.enable = true;
+services.greetd = {
+  enable = true;
+  settings.command = "${pkgs.Hyprland}/bin/hyprland";
+};
+
+
     services.blueman.enable = lib.mkOverride 101 true;
     hardware.bluetooth.enable = lib.mkOverride 101 true;
     

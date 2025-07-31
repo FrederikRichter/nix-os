@@ -10,13 +10,7 @@
 
   services.gvfs.enable = true;
 
-  # Boot
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
-  # Console keymap
-  console.keyMap = lib.mkDefault "us";
   services.keyd = {
       enable = true;
       keyboards = {
