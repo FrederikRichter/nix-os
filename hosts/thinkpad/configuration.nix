@@ -27,12 +27,18 @@
     HandleLidSwitchDocked=ignore
   '';
 
-  # WM
+# WM
 
 programs.sway.enable = true;
 services.greetd = {
   enable = true;
-  settings.command = "${pkgs.sway}/bin/sway";
+  settings = rec {
+    initial_session = {
+      user = "frederik";
+      command = "${pkgs.sway}/bin/sway";
+    };
+    default_session = initial_session;
+  };
 };
 
   programs.light.enable = true;
@@ -59,13 +65,16 @@ services.auto-cpufreq.enable = true;
 services.auto-cpufreq.settings = {
   battery = {
      governor = "powersave";
-     turbo = "never";
+     turbo = "auto";
   };
   charger = {
      governor = "performance";
      turbo = "auto";
   };
 };
+
 powerManagement.powertop.enable = true;
+services.system76-scheduler.settings.cfsProfiles.enable = true; # Better scheduling for CPU cycles
+
   system.stateVersion = "25.05";
 }

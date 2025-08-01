@@ -16,20 +16,23 @@
     ];
 
 
-    # WM
+# WM
 
-    
 
-programs.hyprland = {
-    enable = true;
-};
 
-programs.sway.enable = true;
-services.greetd = {
-  enable = true;
-  settings.command = "${pkgs.Hyprland}/bin/hyprland";
-};
+    programs.hyprland = {
+        enable = true;
+    };
 
+    services.greetd = {
+        settings = rec {
+            initial_session = {
+                user = "frederik";
+                command = "${pkgs.Hyprland}/bin/hyprland";
+            };
+            default_session = initial_session;
+        };
+    };
 
     services.blueman.enable = lib.mkOverride 101 true;
     hardware.bluetooth.enable = lib.mkOverride 101 true;

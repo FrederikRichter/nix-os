@@ -2,15 +2,6 @@
 {
 
 
-services.greetd = {
-  enable = true;
-  settings = rec {
-    initial_session = {
-      user = "frederik";
-    };
-    default_session = initial_session;
-  };
-};
 
     services.pipewire = {
         enable = true;
