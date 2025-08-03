@@ -31,7 +31,7 @@
           system = "x86_64-linux";
           modules =  [
               ./hosts/thinkpad/configuration.nix
-              nixos-hardware.nixosModules.lenovo-thinkpad-t410
+              nixos-hardware.nixosModules.lenovo-thinkpad-t420
           ];
           specialArgs = {
               inherit nixvim;
