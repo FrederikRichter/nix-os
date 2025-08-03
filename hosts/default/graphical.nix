@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 {
-
-
-
+    environment.systemPackages = [
+        pkgs.pulseaudio
+    ];
     services.pipewire = {
         enable = true;
         alsa.enable = true;
@@ -41,15 +41,11 @@
         };
     };
 
-#   services.pipewire.extraConfig.pipewire-pulse."93-no-crackling" = {
-#       "pulse.min.quantum"      = "256/48000";
-# };
-
     services.blueman.enable = lib.mkDefault false;
 
 # Hardware
     hardware.bluetooth = {
-        enable = true;
+        enable = false;
         powerOnBoot = lib.mkDefault false;
         settings.General = {
             Experimental = true;
