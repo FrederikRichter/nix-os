@@ -29,13 +29,13 @@
 
 # WM
 
-programs.sway.enable = true;
+programs.hyprland.enable = true;
 services.greetd = {
   enable = true;
   settings = rec {
     initial_session = {
       user = "frederik";
-      command = "${pkgs.sway}/bin/sway";
+      command = "${pkgs.hyprland}/bin/hyprland";
     };
     default_session = initial_session;
   };
