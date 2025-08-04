@@ -7,15 +7,15 @@
   ];
 
   # Boot
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModprobeConfig = "options thinkpad_acpi experimental=1 fan_control=1";
 
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.enableCryptodisk = true;
-
-  # Setup keyfile
+    
+# Setup keyfile
   boot.initrd.secrets = {
     "/boot/crypto_keyfile.bin" = null;
   };
@@ -46,12 +46,24 @@ services.greetd = {
   console.keyMap = lib.mkOverride 101 "de";
 
 
-  hardware.graphics.extraPackages = with pkgs; [
-      vaapiIntel intel-media-driver 
-  ];
+# FANS
 
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
+  services.thinkfan = {
+      enable = true;
+      sensors = [
+      {
+          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input";
+          type = "hwmon";
+      }
+      {
+          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input";
+          type = "hwmon";
+      }
+      {   
+          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp3_input";
+          type = "hwmon";
+      }
+      ];
   };
 
  # POWER
