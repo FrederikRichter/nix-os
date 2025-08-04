@@ -45,7 +45,7 @@
 
 # Hardware
     hardware.bluetooth = {
-        enable = false;
+        enable = lib.mkDefault false;
         powerOnBoot = lib.mkDefault false;
         settings.General = {
             Experimental = true;
