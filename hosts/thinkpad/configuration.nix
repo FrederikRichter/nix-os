@@ -64,6 +64,12 @@ services.greetd = {
           type = "hwmon";
       }
       ];
+      levels = [
+          # [ level (0-7) lowT highT ]  
+          [ 0 0 65 ]
+          [ 2 65 75 ]
+          [ "level auto" 75 32767 ]
+        ];
   };
 
  # POWER
