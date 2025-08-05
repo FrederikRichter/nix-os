@@ -69,23 +69,22 @@ services.greetd = {
  # POWER
 powerManagement.enable = true;
 
- services.tlp = {
-      enable = false;
+services.tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+       #Optional helps save long term battery health
+       START_CHARGE_THRESH_BAT0 = 45; # 40 and below it starts to charge
+       STOP_CHARGE_THRESH_BAT0 = 85; # 80 and above it stops charging
+
+      };
 };
 
-services.auto-cpufreq.enable = true;
-services.auto-cpufreq.settings = {
-  battery = {
-     governor = "powersave";
-     turbo = "auto";
-  };
-  charger = {
-     governor = "performance";
-     turbo = "auto";
-  };
-};
-
-powerManagement.powertop.enable = true;
 services.system76-scheduler.settings.cfsProfiles.enable = true; # Better scheduling for CPU cycles
 
   system.stateVersion = "25.05";
