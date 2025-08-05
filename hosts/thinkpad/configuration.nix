@@ -52,16 +52,10 @@ services.greetd = {
       enable = true;
       sensors = [
       {
-          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input";
+          query = "/sys/devices/platform/coretemp.0/hwmon";
           type = "hwmon";
-      }
-      {
-          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input";
-          type = "hwmon";
-      }
-      {   
-          query = "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp3_input";
-          type = "hwmon";
+          name = "coretemp";
+          indices = [ 1 2 3 ];
       }
       ];
       levels = [
