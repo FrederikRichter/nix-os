@@ -14,7 +14,10 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.enableCryptodisk = true;
-    
+ 
+
+ hardware.enableAllFirmware = true;
+
 # Setup keyfile
   boot.initrd.secrets = {
     "/boot/crypto_keyfile.bin" = null;
@@ -27,6 +30,16 @@
     HandleLidSwitchDocked=ignore
   '';
 
+# Graphics
+
+  hardware.graphics = { 
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-vaapi-driver     
+      ];
+  };
+
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "i915"; };
 # WM
 
 programs.hyprland.enable = true;
@@ -44,7 +57,6 @@ services.greetd = {
   programs.light.enable = true;
 
   console.keyMap = lib.mkOverride 101 "de";
-
 
 # FANS
 
@@ -77,15 +89,10 @@ services.tlp = {
 
         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-       #Optional helps save long term battery health
-       START_CHARGE_THRESH_BAT0 = 45; # 40 and below it starts to charge
-       STOP_CHARGE_THRESH_BAT0 = 85; # 80 and above it stops charging
-
       };
 };
 
-services.system76-scheduler.settings.cfsProfiles.enable = true; # Better scheduling for CPU cycles
+services.system76-scheduler.settings.cfsProfiles.enable = true;
 
   system.stateVersion = "25.05";
 }
