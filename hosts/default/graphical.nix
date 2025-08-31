@@ -79,4 +79,13 @@
         where = "/mnt/shared";
     }];
 
+# Thunar
+
+programs.thunar.enable = true;
+programs.thunar.plugins = with pkgs.xfce; [
+  thunar-archive-plugin
+  thunar-volman
+];
+
+services.tumbler.enable = true; # Thumbnail support for images
 }
