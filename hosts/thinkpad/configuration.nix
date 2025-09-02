@@ -26,10 +26,6 @@
 
   boot.initrd.luks.devices."luks-f90e1a1e-aeb4-4da6-9051-82b62e012eac".keyFile = "/boot/crypto_keyfile.bin";
 
-  services.logind.extraConfig = ''
-    HandleLidSwitchDocked=ignore
-  '';
-
 # Graphics
 
   hardware.graphics = { 
