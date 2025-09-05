@@ -2,6 +2,7 @@
 {
     environment.systemPackages = [
         pkgs.pulseaudio
+        pkgs.easyeffects
     ];
     services.pipewire = {
         enable = true;
