@@ -2,7 +2,6 @@
 {
     environment.systemPackages = [
         pkgs.pulseaudio
-        pkgs.easyeffects
     ];
     services.pipewire = {
         enable = true;
@@ -50,7 +49,7 @@
         powerOnBoot = lib.mkDefault false;
         settings.General = {
             Experimental = true;
-            ControllerMode = "bredr";
+            # ControllerMode = "bredr";
         };
     };
 
