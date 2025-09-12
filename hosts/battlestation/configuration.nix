@@ -51,8 +51,13 @@
 # Modesetting is required.
             modesetting.enable = true;
             nvidiaSettings = true;
-            package = config.boot.kernelPackages.nvidiaPackages.beta;
-        };
+            package = config.boot.kernelPackages.nvidiaPackages.production.overrideAttrs {
+                version = "580.76.05";
+                src = pkgs.fetchurl {
+                    url = "https://download.nvidia.com/XFree86/Linux-x86_64/580.82.07/NVIDIA-Linux-x86_64-580.82.07.run";
+                    sha256 = "061e48e11fe552232095811d0b1cea9b718ba2540d605074ff227fce0628798c";
+                };
+      };        };
         graphics = {
             enable = true;
             extraPackages = [
