@@ -80,14 +80,5 @@ networking.firewall = {
     allowedUDPPorts = [ 1337 24727 ];
 };
  
-# vm
-    programs.virt-manager.enable = true;
-
-    users.groups.libvirtd.members = ["frederik"];
-
-    virtualisation.libvirtd.enable = true;
-
-    virtualisation.spiceUSBRedirection.enable = true;
-
     system.stateVersion = "25.05";
 }
