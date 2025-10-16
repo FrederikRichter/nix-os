@@ -18,6 +18,8 @@
 
 # WM
 
+
+
     programs.hyprland = {
         enable = true;
     };
@@ -71,9 +73,6 @@
 # HDR fix
     environment.systemPackages = [pkgs.vulkan-hdr-layer-kwin6];
 
-
-# firewall
-
 networking.firewall = {
     enable = true;
     checkReversePath = false;
@@ -81,12 +80,14 @@ networking.firewall = {
     allowedUDPPorts = [ 1337 24727 ];
 };
  
-# vpn
+# vm
+    programs.virt-manager.enable = true;
 
-services.mullvad-vpn = {
-    enable = true;
-    package = pkgs.mullvad-vpn;
-};    
+    users.groups.libvirtd.members = ["frederik"];
+
+    virtualisation.libvirtd.enable = true;
+
+    virtualisation.spiceUSBRedirection.enable = true;
 
     system.stateVersion = "25.05";
 }
