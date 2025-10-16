@@ -59,26 +59,26 @@
 
 # Network Drive
 
-    boot.supportedFilesystems = [ "nfs" ];
-
-    services.rpcbind.enable = true;
-    systemd.mounts = [{
-        type = "nfs";
-        mountConfig = {
-            Options = "noatime";
-        };
-        what = "192.168.1.106:/home/frederik/shared";
-        where = "/mnt/shared";
-    }];
-
-    systemd.automounts = [{
-        wantedBy = [ "multi-user.target" ];
-        automountConfig = {
-            TimeoutIdleSec = "600";
-        };
-        where = "/mnt/shared";
-    }];
-
+    # boot.supportedFilesystems = [ "nfs" ];
+    #
+    # services.rpcbind.enable = true;
+    # systemd.mounts = [{
+    #     type = "nfs";
+    #     mountConfig = {
+    #         Options = "noatime";
+    #     };
+    #     what = "192.168.1.106:/home/frederik/shared";
+    #     where = "/mnt/shared";
+    # }];
+    #
+    # systemd.automounts = [{
+    #     wantedBy = [ "multi-user.target" ];
+    #     automountConfig = {
+    #         TimeoutIdleSec = "600";
+    #     };
+    #     where = "/mnt/shared";
+    # }];
+    #
 # Thunar
 
 programs.thunar.enable = true;

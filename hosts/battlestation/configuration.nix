@@ -77,7 +77,7 @@ networking.firewall = {
     enable = true;
     checkReversePath = false;
     allowedTCPPorts = [ 80 443 1337 ];
-    allowedUDPPorts = [ 1337 ];
+    allowedUDPPorts = [ 1337 24727 ];
 };
  
 # vm
