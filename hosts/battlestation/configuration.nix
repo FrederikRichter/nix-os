@@ -8,6 +8,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
     imports = [
         ../default/base.nix
         ../default/graphical.nix
@@ -81,7 +83,5 @@ networking.firewall = {
     allowedUDPPorts = [ 1337 24727 ];
 };
 
-networking.wg-quick.interfaces.wg0.configFile = "/etc/nixos/nl-ams-wg-201.conf";
- 
     system.stateVersion = "25.05";
 }
