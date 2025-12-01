@@ -4,9 +4,6 @@
   # Services
   services.udisks2.enable = true;
 
-  services.udev.packages = [
-    pkgs.android-udev-rules
-  ];
 
   services.gvfs.enable = true;
 
@@ -75,6 +72,16 @@
     description = lib.mkDefault "Frederik Richter";
     extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" ];
   };
+
+ programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+
+    # Add any missing dynamic libraries for unpackaged programs
+    libc
+    
+  ];
+
     
 
 # ssh

@@ -79,8 +79,6 @@
 networking.firewall = {
     enable = true;
     checkReversePath = false;
-    allowedTCPPorts = [ 80 443 1337 ];
-    allowedUDPPorts = [ 1337 24727 ];
 };
 
     system.stateVersion = "25.05";
