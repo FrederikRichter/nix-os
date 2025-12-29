@@ -4,11 +4,22 @@
   # Console keymap
   console.keyMap = lib.mkDefault "us";
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot = {
+      supportedFilesystems = [ "ntfs" ];
+      kernelPackages = pkgs.linuxPackages_latest;
+      loader = {
+          grub = {
+              enable = true;
+              useOSProber = true;
+              devices = [ "nodev" ];
+              efiSupport = true;
+          };
+          efi = {
+              canTouchEfiVariables = true;
+          };
+          timeout = 5;
+      };
+  };
 
     imports = [
         ../default/base.nix
@@ -19,9 +30,6 @@
 
 
 # WM
-
-
-
     programs.hyprland = {
         enable = true;
     };

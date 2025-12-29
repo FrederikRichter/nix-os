@@ -49,7 +49,7 @@
         powerOnBoot = lib.mkDefault false;
         settings.General = {
             Experimental = true;
-            # ControllerMode = "bredr";
+            ControllerMode = "bredr";
         };
     };
 

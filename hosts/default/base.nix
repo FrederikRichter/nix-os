@@ -27,8 +27,20 @@
 
 
   # Networking
-  networking.networkmanager.enable = true;
-  networking.hostName = lib.mkDefault host;
+  networking = {
+      hostName = lib.mkDefault host;
+      useDHCP = false;
+      dhcpcd.enable = false;
+      networkmanager = {
+          enable = true;
+          dns = "none";
+          wifi.powersave = true;
+      };
+      nameservers = [
+          "185.222.222.222"
+          "45.11.45.11"
+      ];
+  };
 
   # Environment packages
   environment.systemPackages = with pkgs; [
