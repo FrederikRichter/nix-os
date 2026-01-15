@@ -115,6 +115,11 @@ security.sudo = {
     ];
     groups = [ "wheel" ];
   }];
+  extraConfig = with pkgs; ''
+      Defaults:picloud secure_path="${lib.makeBinPath [
+      systemd
+      ]}:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin"
+      '';
 };
     
 
@@ -129,6 +134,11 @@ security.sudo = {
             PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         };
     };
+
+# fonts
+
+fonts.packages = with pkgs; [ inter ];
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
