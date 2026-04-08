@@ -48,7 +48,8 @@
 
 
     hardware.bluetooth.powerOnBoot = lib.mkOverride 101 true;
-	
+
+# Screen
 
 # virt
 virtualisation = {
