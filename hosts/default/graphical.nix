@@ -25,11 +25,21 @@ environment.systemPackages = with pkgs; [
         enable = lib.mkDefault false;
         powerOnBoot = lib.mkDefault false;
         settings.General = {
-            Experimental = true;
-            ControllerMode = "bredr";
             Enable = "Source,Sink,Media,Socket";
+            ControllerMode = "bredr";
+
+            KernelExperimental = true;
+            Experimental = true;
+
+            FastConnectable = true;
         };
     };
+    # systemd.services.bluetooth = {
+    #     serviceConfig.ExecStart = lib.mkForce [
+    #         ""
+    #             "${pkgs.bluez}/libexec/bluetooth/bluetoothd --experimental"
+    #     ];
+  # };
 
 # Security
     security.polkit.enable = lib.mkDefault true;

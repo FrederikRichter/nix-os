@@ -45,7 +45,6 @@
         };
     };
 
-    services.blueman.enable = lib.mkOverride 101 true;
     hardware.bluetooth.enable = lib.mkOverride 101 true;
     
 
@@ -71,18 +70,21 @@
         };
     };
 
-    environment.sessionVariables = {
+    environment.variables = {
         GBM_BACKEND = "nvidia-drm";
         LIBVA_DRIVER_NAME = "nvidia";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         NVD_BACKEND = "direct";
-        GSK_RENDERER = "ngl";
+        # GSK_RENDERER = "ngl"; # HOTFIX
         ENABLE_HDR_WSI = 1;
+        WEBKIT_DISABLE_COMPOSITING_MODE=1; # HOTFIX
+        MOZ_DISABLE_RDD_SANDBOX = "1"; # UNSAFE
     };
     
 # HDR fix
-    environment.systemPackages = [pkgs.vulkan-hdr-layer-kwin6];
+    environment.systemPackages = [pkgs.vulkan-hdr-layer-kwin6 pkgs.libva-utils ];
 
+# Networking
 
 # virt
 virtualisation = {
