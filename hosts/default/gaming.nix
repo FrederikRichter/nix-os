@@ -14,12 +14,15 @@ programs.appimage.binfmt = true;
 
 programs.gamemode.enable = true;
 
+virtualisation.waydroid.enable = true;
+
 networking.firewall = {
       enable = true;
       allowedTCPPorts = [ 8469 27015 27036 ];
+      allowedUDPPorts = [ 19132 ];
 };
 
 users.users.frederik = {
     extraGroups = lib.mkOverride 101 [ "networkmanager" "wheel" "video" ];
   };
-}
+} 

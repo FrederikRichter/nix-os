@@ -1,37 +1,10 @@
 { config, pkgs, lib, ... }:
 {
-    environment.systemPackages = [
-        pkgs.pulseaudio
-    ];
     services.pipewire = {
         enable = true;
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true;
-        wireplumber.extraConfig.bluetoothEnhancements = {
-            "monitor.bluez.properties" = {
-                "bluez5.enable-hw-volume" = true;
-                "bluez5.codecs" = [
-                    "ldac"
-                    "aptx"
-                    "aptx_ll_duplex"
-                    "aptx_ll"
-                    "aptx_hd"
-                    "opus_05_pro"
-                    "opus_05_71"
-                    "opus_05_51"
-                    "opus_05"
-                    "opus_05_duplex"
-                    "aac"
-                    "sbc_xq"
-                    "sbc"
-                ];
-                "bluez5.roles" = [
-                    "a2dp_sink"
-                    "a2dp_source"
-                ];
-            };
-        };
     };
 
     services.pipewire.extraConfig.pipewire."92-low-latency" = {
@@ -40,8 +13,12 @@
             "default.clock.quantum" = 32;
         };
     };
-
-    services.blueman.enable = lib.mkDefault false;
+environment.systemPackages = with pkgs; [
+  mesa
+  libGL
+  libglvnd
+  libdrm
+];
 
 # Hardware
     hardware.bluetooth = {
@@ -50,6 +27,7 @@
         settings.General = {
             Experimental = true;
             ControllerMode = "bredr";
+            Enable = "Source,Sink,Media,Socket";
         };
     };
 
@@ -79,6 +57,15 @@
     #     where = "/mnt/shared";
     # }];
     #
+
+# Networking
+networking.firewall = {
+    enable = true;
+    checkReversePath = false;
+    allowedTCPPorts = [ 3333 ];
+    allowedUDPPorts = [ 3333 ];
+};
+
 # Thunar
 
 programs.thunar.enable = true;

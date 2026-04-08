@@ -83,11 +83,6 @@
 # HDR fix
     environment.systemPackages = [pkgs.vulkan-hdr-layer-kwin6];
 
-# Networking
-networking.firewall = {
-    enable = true;
-    checkReversePath = false;
-};
 
 # virt
 virtualisation = {

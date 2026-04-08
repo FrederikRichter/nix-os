@@ -14,6 +14,7 @@
     let 
       battlestation-host = "nixos-battlestation";
       thinkpad-host = "nixos-thinkpad";
+      ideapad-host = "nixos-ideapad";
     in
   {
       nixosConfigurations."${battlestation-host}" = nixpkgs.lib.nixosSystem {
@@ -26,6 +27,17 @@
               inherit nixos-hardware;
               host = battlestation-host;
           };
+      };
+      nixosConfigurations."${ideapad-host}" = nixpkgs.lib.nixosSystem {
+	system = "x86_64-linux";
+	modules = [
+	  ./hosts/ideapad/configuration.nix
+	];
+	specialArgs = {
+		inherit nixvim;
+		inherit nixos-hardware;
+		host = ideapad-host;
+	};
       };
       nixosConfigurations."${thinkpad-host}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
