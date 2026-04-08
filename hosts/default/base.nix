@@ -136,7 +136,7 @@ security.sudo = {
 
 # fonts
 
-fonts.packages = with pkgs; [ inter ];
+fonts.packages = with pkgs; [ inter libertinus];
 
 
   # Allow unfree packages
