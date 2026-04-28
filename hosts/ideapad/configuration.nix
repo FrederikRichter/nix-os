@@ -1,14 +1,11 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
+  # Boot
+  boot.kernelParams = [ "amd_pstate=guided" ];
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
 
-  boot = {
-      supportedFilesystems = [ "ntfs" ];
-      kernelPackages = pkgs.linuxPackages_latest;
-      # kernelParams = [ "amd_pstate=guided" ];
-  };
 
     imports = [
         ../default/base.nix
@@ -61,28 +58,21 @@ virtualisation = {
   };
 };
 
+
+ 
  # POWER
-powerManagement.enable = true;
 services.upower.enable = true;
+powerManagement = { 
+    enable = true;
+    cpuFreqGovernor = "ondemand";
+    powertop.enable = true;
+};
+
 
 services.logind.settings.Login = {
   HandleLidSwitch = "suspend";
   HandleLidSwitchExternalPower = "suspend";
   HandleLidSwitchDocked = "ignore";
-};
-
-services.tlp = {
-      enable = true;
-      settings = {
-        CPU_DRIVER_OPMODE_ON_AC="passive";
-        CPU_DRIVER_OPMODE_ON_BAT="passive";
-
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      };
 };
 
     system.stateVersion = "25.11";

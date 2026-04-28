@@ -5,8 +5,6 @@
   console.keyMap = lib.mkDefault "us";
 
   boot = {
-      supportedFilesystems = [ "ntfs" ];
-      kernelPackages = pkgs.linuxPackages_latest;
       loader = {
           grub = {
               enable = true;

@@ -7,6 +7,12 @@
   services.fwupd.enable = true;
 
 
+  boot = {
+      supportedFilesystems = [ "ntfs" ];
+      kernelPackages = pkgs.linuxPackages_latest;
+  };
+
+
   services.keyd = {
       enable = true;
       keyboards = {
@@ -82,7 +88,7 @@
   users.users.frederik = {
     isNormalUser = lib.mkDefault true;
     description = lib.mkDefault "Frederik Richter";
-    extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" ];
+    extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" "podman" ];
   };
 
  programs.nix-ld.enable = true;
@@ -134,6 +140,9 @@ security.sudo = {
             PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         };
     };
+
+environment.sessionVariables = { DOCKER_HOST="unix:///run/user/$UID/podman/podman.sock"; };
+
 
 # fonts
 
