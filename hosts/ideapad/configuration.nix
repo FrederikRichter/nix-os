@@ -1,7 +1,7 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
   # Boot
-  boot.kernelParams = [ "amd_pstate=guided" ];
+  boot.kernelParams = [ "amd_pstate=active" ];
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
@@ -62,6 +62,7 @@ virtualisation = {
  
  # POWER
 services.upower.enable = true;
+services.power-profiles-daemon.enable = false;
 powerManagement = { 
     enable = true;
     cpuFreqGovernor = "ondemand";
