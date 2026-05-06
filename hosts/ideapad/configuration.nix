@@ -66,7 +66,7 @@ services.power-profiles-daemon.enable = false;
 powerManagement = { 
     enable = true;
     cpuFreqGovernor = "ondemand";
-    powertop.enable = true;
+    powertop.enable = false;
 };
 
 
