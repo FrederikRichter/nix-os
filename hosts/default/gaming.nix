@@ -9,6 +9,9 @@ programs.steam = {
         pkgs.proton-ge-bin
   ];
 };
+
+boot.kernelModules = [ "ntsync" ];
+
 programs.appimage.enable = true;
 programs.appimage.binfmt = true;
 
