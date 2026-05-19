@@ -38,7 +38,6 @@
       dhcpcd.enable = false;
       networkmanager = {
           enable = true;
-          dns = "none";
           wifi.powersave = true;
       };
       nameservers = [
