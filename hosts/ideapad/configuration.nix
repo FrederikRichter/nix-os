@@ -1,7 +1,7 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
   # Boot
-  boot.kernelParams = [ "amd_pstate=active" ];
+  boot.kernelParams = [ "amd_pstate=guidede" ];
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
@@ -66,7 +66,7 @@ services.power-profiles-daemon.enable = false;
 powerManagement = { 
     enable = true;
     cpuFreqGovernor = "ondemand";
-    powertop.enable = false;
+    powertop.enable = true;
 };
 
 
