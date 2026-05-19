@@ -32,34 +32,19 @@
     # Networking
     networking = {
         hostName = lib.mkDefault host;
-
-        useDHCP = false;
-        dhcpcd.enable = false;
+        dhcpcd.extraConfig = "nohook resolv.conf";
+    
+        nameservers = [
+            "185.222.222.222"
+            "45.11.45.11"
+            "2a09::"
+            "2a11::"
+        ];
 
         networkmanager = {
             enable = true;
             wifi.powersave = true;
-            dns = "systemd-resolved";
-            settings.main = {ignore-auto-dns = true;};
-        };
-    };
-
-    services.resolved = {
-        enable = true;
-
-        settings = {
-            Resolve = {
-                DNS = [
-                    "185.222.222.222"
-                    "45.11.45.11"
-                ];
-                FallbackDNS = [
-                    "185.222.222.222"
-                ];
-                DNSSEC = true;
-                DNSOverTLS = true;
-                DNSDefaultRoute = true;
-            };
+            dns = "none";
         };
     };
 
