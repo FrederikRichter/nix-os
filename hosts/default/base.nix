@@ -47,6 +47,13 @@
       ];
   };
 
+services.resolved = {
+  enable = true;
+  dnssec = "true";
+  domains = [ "~." ];
+  dnsovertls = "true";
+};
+
   # Environment packages
   environment.systemPackages = with pkgs; [
     git
