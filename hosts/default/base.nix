@@ -29,17 +29,18 @@
         };
     };
 
+    environment.etc."resolv.conf".text = ''
+    nameserver 185.222.222.222
+    nameserver 45.11.45.11
+    nameserver 2a09::
+    nameserver 2a11::
+    '';
+
     # Networking
     networking = {
         hostName = lib.mkDefault host;
         dhcpcd.extraConfig = "nohook resolv.conf";
-    
-        nameservers = [
-            "185.222.222.222"
-            "45.11.45.11"
-            "2a09::"
-            "2a11::"
-        ];
+        resolvconf.enable = false;
 
         networkmanager = {
             enable = true;
