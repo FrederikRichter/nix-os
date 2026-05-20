@@ -53,6 +53,7 @@
     environment.systemPackages = with pkgs; [
         git
         home-manager
+        wireguard-tools
     ] ++ [
             nixvim
         ];
