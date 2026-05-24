@@ -1,7 +1,7 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
   # Boot
-  boot.kernelParams = [ "amd_pstate=guidede" ];
+  boot.kernelParams = [ "amd_pstate=guided" ];
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
