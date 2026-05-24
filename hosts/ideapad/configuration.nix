@@ -1,7 +1,7 @@
 { config, host, nixos-hardware, pkgs, lib, ... }:
 {
   # Boot
-  boot.kernelParams = [ "amd_pstate=guided" ];
+  boot.kernelParams = [ "amd_pstate=active" ];
 
   # Console keymap
   console.keyMap = lib.mkDefault "us";
@@ -65,9 +65,17 @@ services.upower.enable = true;
 services.power-profiles-daemon.enable = false;
 powerManagement = { 
     enable = true;
-    cpuFreqGovernor = "ondemand";
+    cpuFreqGovernor = "schedutil";
     powertop.enable = true;
 };
+
+    services.auto-epp = {
+        enable = true;
+        settings = {
+            epp_state_for_AC = "balance_performance";
+            epp_state_for_BAT = "balance_power";
+        };
+    };
 
 
 services.logind.settings.Login = {
