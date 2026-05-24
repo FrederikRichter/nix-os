@@ -38,17 +38,16 @@
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "i915"; };
 # WM
 
-programs.hyprland.enable = true;
-services.greetd = {
-  enable = true;
-  settings = rec {
-    initial_session = {
-      user = "frederik";
-      command = "${pkgs.hyprland}/bin/hyprland";
+    services.greetd = {
+        enable = true;
+        settings = rec {
+            initial_session = {
+                user = "frederik";
+                command = "${pkgs.hyprland}/bin/start-hyprland";
+            };
+            default_session = initial_session;
+        };
     };
-    default_session = initial_session;
-  };
-};
 
   programs.light.enable = true;
 
