@@ -49,8 +49,6 @@
         };
     };
 
-  programs.light.enable = true;
-
   console.keyMap = lib.mkOverride 101 "de";
 
 # FANS
