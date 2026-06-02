@@ -71,7 +71,7 @@ powerManagement = {
 
     services.auto-epp = {
         enable = true;
-        settings = {
+        settings.Settings = {
             epp_state_for_AC = "balance_performance";
             epp_state_for_BAT = "balance_power";
         };
