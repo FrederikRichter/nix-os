@@ -149,6 +149,9 @@
 
     fonts.packages = with pkgs; [ inter libertinus];
 
+    # Fastly substituter
+    nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
+
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
