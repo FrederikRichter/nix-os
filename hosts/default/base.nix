@@ -150,7 +150,7 @@
     fonts.packages = with pkgs; [ inter libertinus];
 
     # Fastly substituter
-    nix.settings.substituters = [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
+    nix.settings.substituters = lib.mkBefore [ "https://aseipp-nix-cache.global.ssl.fastly.net" ];
 
 
     # Allow unfree packages
