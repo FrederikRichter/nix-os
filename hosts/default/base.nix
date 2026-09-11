@@ -34,10 +34,8 @@
         hostName = lib.mkDefault host;
         dhcpcd.extraConfig = "nohook resolv.conf";
         nameservers = [
-            "185.222.222.222"
-            "45.11.45.11"
-            "2a09::"
-            "2a11::"
+            "194.242.2.2"
+            "2a07:e340::2"
         ];
 
         networkmanager = {
