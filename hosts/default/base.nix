@@ -30,18 +30,14 @@
     };
 
     # Networking
+    services.resolved.enable = true;
+
     networking = {
         hostName = lib.mkDefault host;
-        dhcpcd.extraConfig = "nohook resolv.conf";
-        nameservers = [
-            "194.242.2.2"
-            "2a07:e340::2"
-        ];
 
         networkmanager = {
             enable = true;
             wifi.powersave = true;
-            dns = "none";
         };
     };
 
