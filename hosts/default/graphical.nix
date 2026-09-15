@@ -73,7 +73,7 @@ networking.firewall = {
     enable = true;
     checkReversePath = false;
     allowedTCPPorts = [ 3333 ];
-    allowedUDPPorts = [ 3333 ];
+    allowedUDPPorts = [ 3333 24727 ];
 };
 
 # Thunar
