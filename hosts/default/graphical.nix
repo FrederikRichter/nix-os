@@ -72,8 +72,8 @@ environment.systemPackages = with pkgs; [
 networking.firewall = {
     enable = true;
     checkReversePath = false;
-    allowedTCPPorts = [ 3333 ];
-    allowedUDPPorts = [ 3333 24727 ];
+    allowedTCPPorts = [ 53317 ];
+    allowedUDPPorts = [ 53317 24727 ];
 };
 
 # Thunar
