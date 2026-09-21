@@ -58,6 +58,7 @@
 # Modesetting is required.
             modesetting.enable = true;
             nvidiaSettings = true;
+            powerManagement.enable = true;
             package = config.boot.kernelPackages.nvidiaPackages.latest;
         };
         graphics = {
