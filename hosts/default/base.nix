@@ -1,4 +1,4 @@
-{ pkgs, nixvim, lib, host, ... }:
+{ pkgs, lib, host, ... }:
 {
     # Services
     services.udisks2.enable = true;
@@ -46,9 +46,9 @@
         git
         home-manager
         wireguard-tools
-    ] ++ [
-            nixvim
-        ];
+        nixvim
+    ];
+        
 
 
     # Nix features

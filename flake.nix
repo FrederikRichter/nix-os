@@ -4,53 +4,58 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     nixvim = {
-        url = "github:FrederikRichter/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:FrederikRichter/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = { nixpkgs, nixvim, nixos-hardware, ... }:
-    let 
-      battlestation-host = "nixos-battlestation";
-      thinkpad-host = "nixos-thinkpad";
-      ideapad-host = "nixos-ideapad";
+    let
+      overlays = [
+        nixvim.overlays.default
+      ];
     in
-  {
-      nixosConfigurations."${battlestation-host}" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules =  [
-              ./hosts/battlestation/configuration.nix
-          ];
-          specialArgs = {
-              inherit nixvim;
-              inherit nixos-hardware;
-              host = battlestation-host;
-          };
-      };
-      nixosConfigurations."${ideapad-host}" = nixpkgs.lib.nixosSystem {
-	system = "x86_64-linux";
-	modules = [
-	  ./hosts/ideapad/configuration.nix
-	];
-	specialArgs = {
-		inherit nixvim;
-		inherit nixos-hardware;
-		host = ideapad-host;
-	};
-      };
-      nixosConfigurations."${thinkpad-host}" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules =  [
-              ./hosts/thinkpad/configuration.nix
-              nixos-hardware.nixosModules.lenovo-thinkpad-t420
-          ];
-          specialArgs = {
-              inherit nixvim;
-              inherit nixos-hardware;
-              host = thinkpad-host;
-          };
-      };
-  };
-}
+    {
+      # Export the overlay so other flakes can consume it.
+      overlays.default = nixpkgs.lib.composeManyExtensions overlays;
 
+      nixosConfigurations.nixos-battlestation =
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            # Apply the overlays to this NixOS configuration
+            {
+              nixpkgs.overlays = overlays;
+            }
+
+            ./hosts/battlestation/configuration.nix
+          ];
+
+          specialArgs = {
+            host = "nixos-battlestation";
+            inherit nixos-hardware;
+          };
+        };
+
+      nixosConfigurations.nixos-ideapad =
+        nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            {
+              nixpkgs.overlays = overlays;
+            }
+
+            ./hosts/ideapad/configuration.nix
+          ];
+
+          specialArgs = {
+            host = "nixos-ideapad";
+            inherit nixos-hardware;
+          };
+        };
+    };
+}
