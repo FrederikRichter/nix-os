@@ -27,21 +27,8 @@
     ];
 
 
-# WM
-    programs.hyprland = {
-        enable = true;
-    };
-
-    services.greetd = {
-        enable = true;
-        settings = rec {
-            initial_session = {
-                user = "frederik";
-                command = "${pkgs.hyprland}/bin/start-hyprland";
-            };
-            default_session = initial_session;
-        };
-    };
+    # Auto login on TTY1 (Hyprland is started by Home Manager via zsh)
+    services.getty.autologinUser = "frederik";
 
     hardware.bluetooth.enable = lib.mkOverride 101 true;
     

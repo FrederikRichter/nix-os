@@ -79,11 +79,14 @@
         LC_TIME = "de_DE.UTF-8";
     };
 
-    # Users
+    # Shell & Users
+    programs.zsh.enable = true;
+
     users.users.frederik = {
         isNormalUser = lib.mkDefault true;
         description = lib.mkDefault "Frederik Richter";
         extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" "podman" ];
+        shell = pkgs.zsh;
     };
 
     programs.nix-ld.enable = true;
