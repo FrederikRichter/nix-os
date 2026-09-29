@@ -7,8 +7,24 @@
 
 
     boot = {
-        supportedFilesystems = [ "ntfs" ];
+        supportedFilesystems = [ "ntfs" "nfs" ];
         kernelPackages = pkgs.linuxPackages_latest;
+    };
+
+    # Network Drive
+    fileSystems."/mnt/Movies" = {
+        device = "192.168.1.106:/home/frederik/Movies";
+        fsType = "nfs";
+        options = [
+            "x-systemd.automount"
+            "noauto"
+            "x-systemd.idle-timeout=600"
+            "x-systemd.mount-timeout=5s"
+            "x-gvfs-show"
+            "nofail"
+            "_netdev"
+            "noatime"
+        ];
     };
 
 
