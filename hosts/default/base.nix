@@ -20,7 +20,6 @@
             "noauto"
             "x-systemd.idle-timeout=600"
             "x-systemd.mount-timeout=5s"
-            "x-gvfs-show"
             "nofail"
             "_netdev"
             "noatime"
