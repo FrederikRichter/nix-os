@@ -12,14 +12,15 @@
     };
 
     # Network Drive
-    fileSystems."/mnt/Movies" = {
-        device = "192.168.1.106:/home/frederik/Movies";
+    fileSystems."/media/shared" = {
+        device = "192.168.1.106:/srv/storage";
         fsType = "nfs";
         options = [
             "x-systemd.automount"
             "noauto"
             "x-systemd.idle-timeout=600"
             "x-systemd.mount-timeout=5s"
+            "x-gvfs-show"
             "nofail"
             "_netdev"
             "noatime"
@@ -33,12 +34,12 @@
             # The name is just the name of the configuration file, it does not really matter
             default = {
                 extraConfig = ''
-            [ids]
-            *
+                [ids]
+                *
 
-            [main]
-            capslock = esc
-            esc = capslock
+                [main]
+                capslock = esc
+                esc = capslock
                 '';
             };
         };
@@ -63,7 +64,7 @@
         wireguard-tools
         nixvim
     ];
-        
+
 
 
     # Nix features
