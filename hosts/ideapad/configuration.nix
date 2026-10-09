@@ -37,6 +37,23 @@
     # tailscale
     services.tailscale.enable = true;
 
+    # Network Drive
+    fileSystems."/media/shared-tailscale" = {
+        device = "radxa-zero3:/srv/storage";
+        fsType = "nfs";
+        options = [
+            "x-systemd.automount"
+            "noauto"
+            "x-systemd.idle-timeout=600"
+            "x-systemd.mount-timeout=5s"
+            "x-gvfs-show"
+            "nofail"
+            "_netdev"
+            "noatime"
+        ];
+    };
+
+
     # POWER
     services.upower.enable = true;
     services.power-profiles-daemon.enable = false;
