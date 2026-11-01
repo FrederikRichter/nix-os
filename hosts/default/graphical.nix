@@ -48,6 +48,20 @@ networking.firewall = {
     allowedUDPPorts = [ 53317 24727 ];
 };
 
+# atmega debugging
+
+    services.udev.packages = [ pkgs.openocd ];
+    services.udev.extraRules = ''
+          # Atmel-ICE (JTAG / ISP / debugWIRE / PDI)
+          SUBSYSTEM=="usb", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2140", MODE="0660", TAG+="uaccess"
+
+          # FT2232H on the evaluation board (OpenOCD JTAG and UART)
+          SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0660", TAG+="uaccess"
+          KERNEL=="ttyUSB[0-9]*", TAG+="uaccess"
+          KERNEL=="ttyACM[0-9]*", TAG+="uaccess"
+    '';
+
+
 # Thunar
 programs.thunar.enable = true;
 programs.thunar.plugins = with pkgs; [
