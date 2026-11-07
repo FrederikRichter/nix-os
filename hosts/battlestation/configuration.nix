@@ -42,7 +42,7 @@
     hardware = {
         nvidia = {
             open = true;   
-# Modesetting is required.
+            # Modesetting is required.
             modesetting.enable = true;
             nvidiaSettings = true;
             powerManagement.enable = true;
