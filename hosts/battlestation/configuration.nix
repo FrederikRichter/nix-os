@@ -46,7 +46,7 @@
             modesetting.enable = true;
             nvidiaSettings = true;
             powerManagement.enable = true;
-            package = config.boot.kernelPackages.nvidiaPackages.latest;
+            package = config.boot.kernelPackages.nvidiaPackages.bleeding_edge;
         };
         graphics = {
             enable = true;
