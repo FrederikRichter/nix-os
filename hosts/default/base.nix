@@ -65,17 +65,6 @@
         nixvim
     ];
 
-
-    # Podman
-    virtualisation = {
-        containers.enable = true;
-        podman = {
-            enable = true;
-            dockerCompat = true;
-            defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
-        };
-    };
-
     # Nix features
     nix.settings = {
         experimental-features = [ "nix-command" "flakes" ];
@@ -110,7 +99,7 @@
     users.users.frederik = {
         isNormalUser = lib.mkDefault true;
         description = lib.mkDefault "Frederik Richter";
-        extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" "podman" ];
+        extraGroups = lib.mkDefault [ "networkmanager" "wheel" "video" ];
         shell = pkgs.zsh;
     };
 
@@ -163,9 +152,6 @@
             PermitRootLogin = "no"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
         };
     };
-
-    environment.sessionVariables = { DOCKER_HOST="unix:///run/user/$UID/podman/podman.sock"; };
-
 
     # fonts
 
