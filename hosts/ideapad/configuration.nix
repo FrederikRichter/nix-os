@@ -38,20 +38,20 @@
     services.tailscale.enable = true;
 
     # Network Drive
-    fileSystems."/media/shared-tailscale" = {
-        device = "radxa-zero3:/srv/storage";
-        fsType = "nfs";
-        options = [
-            "x-systemd.automount"
-            "noauto"
-            "x-systemd.idle-timeout=600"
-            "x-systemd.mount-timeout=5s"
-            "x-gvfs-show"
-            "nofail"
-            "_netdev"
-            "noatime"
-        ];
-    };
+    # fileSystems."/media/shared-tailscale" = {
+    #     device = "radxa-zero3:/srv/storage";
+    #     fsType = "nfs";
+    #     options = [
+    #         "x-systemd.automount"
+    #         "noauto"
+    #         "x-systemd.idle-timeout=600"
+    #         "x-systemd.mount-timeout=5s"
+    #         "x-gvfs-show"
+    #         "nofail"
+    #         "_netdev"
+    #         "noatime"
+    #     ];
+    # };
 
 
     # POWER
@@ -77,6 +77,20 @@
         HandleLidSwitchExternalPower = "suspend";
         HandleLidSwitchDocked = "ignore";
     };
+
+
+    # atmega debugging
+
+    services.udev.packages = [ pkgs.openocd ];
+    services.udev.extraRules = ''
+          # Atmel-ICE (JTAG / ISP / debugWIRE / PDI)
+          SUBSYSTEM=="usb", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2140", MODE="0660", TAG+="uaccess"
+
+          # FT2232H on the evaluation board (OpenOCD JTAG and UART)
+          SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0660", TAG+="uaccess"
+          KERNEL=="ttyUSB[0-9]*", TAG+="uaccess"
+          KERNEL=="ttyACM[0-9]*", TAG+="uaccess"
+    '';
 
 
     system.stateVersion = "25.11";
