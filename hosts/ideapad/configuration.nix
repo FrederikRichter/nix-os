@@ -38,20 +38,20 @@
     services.tailscale.enable = true;
 
     # Network Drive
-    # fileSystems."/media/shared-tailscale" = {
-    #     device = "radxa-zero3:/srv/storage";
-    #     fsType = "nfs";
-    #     options = [
-    #         "x-systemd.automount"
-    #         "noauto"
-    #         "x-systemd.idle-timeout=600"
-    #         "x-systemd.mount-timeout=5s"
-    #         "x-gvfs-show"
-    #         "nofail"
-    #         "_netdev"
-    #         "noatime"
-    #     ];
-    # };
+    fileSystems."/media/shared-tailscale" = {
+        device = "radxa-zero3:/srv/storage";
+        fsType = "nfs";
+        options = [
+            "x-systemd.automount"
+            "noauto"
+            "x-systemd.idle-timeout=600"
+            "x-systemd.mount-timeout=5s"
+            "x-gvfs-show"
+            "nofail"
+            "_netdev"
+            "noatime"
+        ];
+    };
 
 
     # POWER
@@ -94,9 +94,6 @@
 
 
     system.stateVersion = "25.11";
-    # Edit this configuration file to define what should be installed on
-    # your system.  Help is available in the configuration.nix(5) man page
-    # and in the NixOS manual (accessible by running ‘nixos-help’).
 
     # Bootloader.
     boot.loader.systemd-boot.enable = true;
