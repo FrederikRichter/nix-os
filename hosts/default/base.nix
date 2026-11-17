@@ -112,6 +112,9 @@
 
     ];
 
+    # AppArmor
+    security.apparmor.enable = true;
+
     # sudo
 
     security.sudo = {
