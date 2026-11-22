@@ -69,6 +69,10 @@
     nix.settings = {
         experimental-features = [ "nix-command" "flakes" ];
         trusted-users = [ "root" "@wheel" ];
+        http2 = false;
+        download-buffer-size = 134217728; # 128 MiB
+        max-substitution-jobs = 25;
+        http-connections = 50;
     };
 
     nix.gc = {
