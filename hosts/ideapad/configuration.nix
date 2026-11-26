@@ -80,17 +80,20 @@
 
 
     # atmega debugging
+    users.users.frederik.extraGroups = [ "networkmanager" "wheel" "video" "dialout" ];
 
-    services.udev.packages = [ pkgs.openocd ];
-    services.udev.extraRules = ''
-          # Atmel-ICE (JTAG / ISP / debugWIRE / PDI)
-          SUBSYSTEM=="usb", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2140", MODE="0660", TAG+="uaccess"
+    services.udev.packages = [
+        pkgs.openocd
+        (pkgs.writeTextDir "etc/udev/rules.d/60-atmega.rules" ''
+            # Atmel-ICE (JTAG / ISP / debugWIRE / PDI)
+            SUBSYSTEM=="usb", ATTR{idVendor}=="03eb", ATTR{idProduct}=="2140", MODE="0660", TAG+="uaccess"
 
-          # FT2232H on the evaluation board (OpenOCD JTAG and UART)
-          SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0660", TAG+="uaccess"
-          KERNEL=="ttyUSB[0-9]*", TAG+="uaccess"
-          KERNEL=="ttyACM[0-9]*", TAG+="uaccess"
-    '';
+            # FT2232H on the evaluation board (OpenOCD JTAG and UART)
+            SUBSYSTEM=="usb", ATTR{idVendor}=="0403", ATTR{idProduct}=="6010", MODE="0660", TAG+="uaccess"
+            KERNEL=="ttyUSB[0-9]*", GROUP="dialout", MODE="0660", TAG+="uaccess"
+            KERNEL=="ttyACM[0-9]*", GROUP="dialout", MODE="0660", TAG+="uaccess"
+        '')
+    ];
 
 
     system.stateVersion = "25.11";
